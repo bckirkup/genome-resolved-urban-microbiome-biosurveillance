@@ -172,18 +172,18 @@ Risk*.
 **Bioinformatics** (Submitted).
 
 ## Contact
-For questions, feedback, or collaboration regarding GRUMB, please reach out:
+For questions, feedback, or collaboration regarding this framework, please reach out:
 
-Suleiman Aminu
-PhD Researcher
+Suleiman Aminu,
+PhD Researcher,
 Department of Chemical and Biochemical Sciences,
-University Mohammed VI Polytechnic (UM6P), Morocco
+University Mohammed VI Polytechnic (UM6P), Morocco,
 suleiman.aminu@um6p.ma
 
-Prof. Rachid Daoud
-Group Leader & Supervisor
+Prof. Rachid Daoud,
+Group Leader & Supervisor,
 Department of Chemical and Biochemical Sciences, 
-University Mohammed VI Polytechnic (UM6P), Morocco
+University Mohammed VI Polytechnic (UM6P), Morocco,
 rachid.daoud@um6p.ma
 
 
