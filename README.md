@@ -170,5 +170,22 @@ Aminu, S., Ascandari, A., Benhida, R., Daoud, R. (2025).
 *GRUMB: A Genome-Resolved Metagenomic Framework for Monitoring Urban Microbiome and Diagnosing Pathogen
 Risk*.  
 **Bioinformatics** (Submitted).
+
+## Contact
+For questions, feedback, or collaboration regarding GRUMB, please reach out:
+
+Suleiman Aminu
+PhD Researcher
+Department of Chemical and Biochemical Sciences,
+University Mohammed VI Polytechnic (UM6P), Morocco
+suleiman.aminu@um6p.ma
+
+Prof. Rachid Daoud
+Group Leader & Supervisor
+Department of Chemical and Biochemical Sciences, 
+University Mohammed VI Polytechnic (UM6P), Morocco
+rachid.daoud@um6p.ma
+
+
  
 
