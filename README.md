@@ -164,7 +164,7 @@ Zenodo. [https://doi.org/10.5281/zenodo.15505402](https://doi.org/10.5281/zenodo
 
 Aminu, S., Ascandari, A., Mokhtar, M.M., El Allali, A., Benhida, R., Daoud, R. (2025).  
 *Genome-Resolved Species-Level Surveillance and Predictive Risk Modeling of Urban Microbiomes*.  
-Microbiome** (Submitted).
+**Microbiome** (Submitted).
 
 Aminu, S., Ascandari, A., Benhida, R., Daoud, R. (2025).  
 *GRUMB: A Genome-Resolved Metagenomic Framework for Monitoring Urban Microbiome and Diagnosing Pathogen
