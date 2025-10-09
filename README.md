@@ -1,135 +1,132 @@
-
-#  Genome-Resolved Urban Microbiome Biosurveillance
-
-A fully integrated framework for **genome-resolved metagenomics**, **ecological modeling**, and **machine learning** designed to support microbial surveillance and risk assessment in urban environments.
-
-This pipeline enables high-resolution tracking of pathogen-associated taxa across infrastructure types such as ambulances, hospital interiors, sewage systems, and public transport. It combines robust preprocessing, species-level ecological analytics, and predictive modeling to uncover microbial transmission patterns, contamination risks, and ecological vulnerability.
+#  **GRUMB : Genome-Resolved Urban Microbiome Biosurveillance**
 
 ---
 
-## What This Framework Offers
+ 
+### *A fully integrated framework for genome-resolved metagenomics, ecological modeling, and predictive risk assessment*  
 
-- **Genome-resolved profiling**: From raw reads to annotated MAGs with virulence and AMR gene screening.
--  **Ecological modeling**: Diversity analysis, indicator species detection, community structuring.
-- **Machine learning diagnostics**: Environmental source prediction, entropy-based identity modeling, and composite risk scoring.
-- **Simulation-based inference**: Synthetic community blending, ecological fragility assessment, and uncertainty quantification.
+**GRUMB (Genome-Resolved Urban Microbiome Biosurveillance)** is an open-source, SLURM-compatible pipeline that unites **assembly-based metagenomics, ecological modeling, and simulation-driven machine learning** for infrastructure-scale biosurveillance.  
+It reconstructs **metagenome-assembled genomes (MAGs)** from raw shotgun reads, performs **taxonomic and functional annotation**, applies **batch-aware normalization**, and models **environmental stability, cross-contamination, and risk** through interpretable, uncertainty-aware ML diagnostics.  
 
-Built for reproducibility, explainability, and cross-environment comparability, this framework operationalizes biosurveillance as a diagnostic, data-driven process.
-
----
-
-
-## Modules
-
-### 1 Bioinformatics
-High-throughput metagenomic processing on HPC:
-- Quality control, adapter trimming
-- Host decontamination and screening
-- Assembly, binning, MAG quality control
-- Functional annotation (VFDB & CARD)
-
-**Scripts:**
-```
-01_Bioinformatics/
-├── 01_run.sh
-├── 02_fastq_screen.sh
-├── 03_collect_files.sh
-├── simplifyFastaHeaders.pl
-```
+Built for **urban and human-built environments** such as ambulances, hospital environments, hospital sewage, and  public transport systems, GRUMB transforms descriptive microbiome profiling into quantitative, predictive biosurveillance.  
 
 ---
 
-### 2 Quality & Batch Subsetting
-Species-level matrix refinement and pathogen-focused subsetting:
-- MAG quality metrics & contiguity modeling
-- Batch correction (PCA, UMAP, t-SNE)
-- Pathogen selection based on virulence and resistance
+##  What This Framework Offers  
 
-**Scripts:**
-```
-02_Quality_batch_subsetting/
-├── 04_mag_quality_metrics_analysis.py
-├── 05_normalize_species_counts.py
-├── 06_Batch_Correction_PCA_UMAP_tsne.R.R
-├── 07_subset_pathogenic_species.py
-```
+| Capability | Description |
+|-------------|-------------|
+| **Genome-resolved profiling** | From raw FASTQ or SRA accessions → high-quality MAGs via MEGAHIT assembly, MetaBAT2 binning, CheckM2 QC, and GTDB-Tk taxonomy. |
+| **Functional annotation** | ARG  and virulence gene screening via DIAMOND and RGI integration. |
+| **Ecological modeling** | Alpha/beta diversity metrics (Shannon, Simpson, PERMANOVA, ANOSIM), indicator species identification, and WHO-pathogen network mapping. |
+| **Machine learning diagnostics** | Environment classification (Random Forest / Decision Tree) with nested CV, feature importance ranking, and entropy-based uncertainty. |
+| **Simulation-based inference** | Synthetic donor–recipient mixing to quantify Minimal Detectable Contamination (MDC), entropy tipping points, and source–sink dominance. |
+| **Risk quantification** | Composite contamination risk index combining override frequency, entropy, richness, and variance to rank environmental vulnerability. |
+
+Designed for **reproducibility, explainability, and cross-environment comparability**, GRUMB  operationalizes biosurveillance as a quantitative, diagnostic process.  
 
 ---
 
-### 3 Ecology & Diversity Analysis
-Ecological fingerprinting of urban environments:
-- Alpha & beta diversity, PERMANOVA, ANOSIM
-- Indicator species and NMDS ordination
-- WHO-pathogen co-occurrence networks
+##  Pipeline Overview 
 
-**Scripts:**
+```text
+             ┌──────────────────────────────────────────────────────────────┐
+             │                 GRUMB : Analytical Workflow                  │
+             └──────────────────────────────────────────────────────────────┘
+
+         ┌──────────────┐
+         │  Raw Reads   │     Shotgun metagenomes (FASTQ/SRA)
+         └──────┬───────┘
+                │
+                ▼
+┌────────────────────────────────────────────────────────────────────────────┐
+│   MODULE 1: BIOINFORMATICS                                                 │
+│  - Quality control & host filtering (BBTools, FastQ Screen)                │
+│  - Assembly (MEGAHIT) + Binning (MetaBAT2)                                 │
+│  - MAG quality (CheckM2) + Dereplication (dRep, 95% ANI)                   │
+│  - Taxonomy (GTDB-Tk) + Functional annotation (CARD, VFDB)                 │
+│  - Output: High-quality dereplicated MAGs + species-level TPM matrices     │ 
+│  - Runtime: ~22 min average per sample                                     │                                                            
+└────────────────────────────────────────────────────────────────────────────┘
+                │
+                ▼
+┌────────────────────────────────────────────────────────────────────────────┐
+│   MODULE 2: QUALITY ASSESSMENT & BATCH CORRECTION                          │
+│  - Sequencing coverage (Nonpareil) + MAG/assembly metrics (QUAST)          │
+│  - CLR transformation + limma batch correction                             │
+│  - PCA, UMAP, t-SNE, PERMANOVA diagnostics                                 │
+│  - Output: Batch-corrected TPM matrices, harmonized data                   │
+└────────────────────────────────────────────────────────────────────────────┘
+                │
+                ▼
+┌────────────────────────────────────────────────────────────────────────────┐
+│   MODULE 3: ECOLOGY & DIVERSITY                                            │
+│  - Alpha & Beta diversity (Shannon, Simpson, PERMANOVA, ANOSIM)            │
+│  - Indicator species & NMDS ordination (indicspecies)                      │
+│  - WHO-priority pathogen network & co-occurrence modeling                  │
+│  - Output: Species prevalence, network graphs, ecological fingerprints     │
+└────────────────────────────────────────────────────────────────────────────┘
+                │
+                ▼
+┌────────────────────────────────────────────────────────────────────────────┐
+│  MODULE 4: MACHINE LEARNING & ECOLOGICAL SIMULATIONS                       │
+│  - Environment classification (Random Forest, DT, SVM, GB, LR)             │
+│  - Feature importance (Gini, permutation, consensus ranking)               │
+│  - Synthetic donor–recipient mixing & entropy-based tipping points         │
+│  - Risk scoring: override freq + entropy + richness + variance             │
+│  - Output: Contamination thresholds, entropy trajectories, risk indices    │
+└────────────────────────────────────────────────────────────────────────────┘
+                │
+                ▼
+┌────────────────────────────────────────────────────────────────────────────┐
+│ FINAL OUTPUTS                                                              │
+│  - MAGs + Annotations (CARD/VFDB)                                          │
+│  - TPM matrices (raw, CLR, corrected)                                      │
+│  - Ecological diversity & network plots                                    │
+│  - ML benchmarks + simulation results                                      │
+│  - Composite ecological risk profiles per environment                      │
+└────────────────────────────────────────────────────────────────────────────┘
+
 ```
-03_Ecology/
-├── 08_species_community_analysis.R
-├── 09_pathogen_prevalence_diversity.py
-```
+#### **Each module is fully independent and can be deployed separately or executed end-to-end on HPC clusters. For more detailed descriptions of the modules, check the individual README in the sub-folders**
+
+## Dependencies  
+
+| Category | Software / Library |
+|-----------|--------------------|
+| **Core** | Python ≥ 3.11, R ≥ 4.2, SLURM scheduler |
+| **Assembly & Binning** | MEGAHIT, MetaBAT2, CheckM2, dRep |
+| **Taxonomy & Annotation** | GTDB-Tk, DIAMOND, RGI |
+| **QC & Metrics** | FastQC, BBTools, FastQ Screen, QUAST, Nonpareil |
+| **Normalization & Ecology** | limma, vegan, indicspecies, compositions, umap, Rtsne |
+| **Machine Learning & Simulation** | scikit-learn, pandas, numpy, seaborn, matplotlib, scipy, scikit-posthocs |
 
 ---
 
-### 4 Machine Learning & Risk Modeling
-Explainable AI pipeline for microbial classification:
-- Random Forest classifier training and benchmarking
-- Monte Carlo simulation with feature importance
-- Synthetic community blending
-- Entropy modeling and risk scoring
+##  Example Execution  
 
-**Scripts:**
-```
-04_Machine_Learning/
-├── 10_rf_model_training.py
-├── 11_model_comparison.py
-├── 12_ML_Comparison_Script.R
-├── 13_ML_Env_Biosurveillance.py
-```
-
----
-
-## Requirements
-
-- Python ≥ 3.8
-- R ≥ 4.3.0
-- Conda (recommended)
-- SLURM-compatible HPC environment (for `.sh` scripts)
-
-Install Python environment:
 ```bash
-conda create -n urban_env python=3.11
-conda activate urban_env
-pip install pandas numpy scikit-learn seaborn matplotlib joblib tqdm
+# Bioinformatics Module
+bash 01_Bioinformatics/01_actual_New_run.sh
+bash 01_Bioinformatics/02_Assembly_Binning.sh
+bash 01_Bioinformatics/03_global_drep_taxonomy_abundance.sh
+
+# Quality Assessment + Batch Correction
+python3 02_quality_assessements_batch_correction/01_Species_TPM\ matrix_for_limma.py
+Rscript 02_quality_assessements_batch_correction/02_CLRtransformation_batch_correction.R
+bash 02_quality_assessements_batch_correction/03_final_collect_files_downstream.sh
+
+# Ecology and Machine Learning
+Rscript 03_Ecology/01_Ecology_Analysis.R
+python3 04_Machine_Learning_and_Ecological_Blending_Simulation/03_Contaminations_Simulations_Ecological_Scoring.py
 ```
 
----
-
-## Usage Examples
-
-Run ML classifier:
-```bash
-sbatch 04_Machine_Learning/10_rf_model_training.py
+## System Requirements
 ```
-
-Run ecology analysis:
-```bash
-Rscript 03_Ecology/08_species_community_analysis.R
-```
-
----
-
-##  Folder Structure
-
-```
-Urban_Microbiome_Surveillance/
-├── 01_Bioinformatics/
-├── 02_Quality_batch_subsetting/
-├── 03_Ecology/
-├── 04_Machine_Learning/
-├── README.md
-├── LICENSE
-└── .gitignore
+Linux (Ubuntu 20.04 +)
+Python 3.11 +, R 4.2 +
+≥ 96 GB RAM (typical HPC node)
+SLURM or equivalent job scheduler
 ```
 
 ---
@@ -138,47 +135,77 @@ Urban_Microbiome_Surveillance/
 
 MIT License — free to use, adapt, and cite with attribution.
 
- This Framework, otherwise referred to **GRUMB** is currently part of a manuscript under peer review.
+---
 
-This repository is shared under the MIT License to promote transparency and reproducibility.  
-A Zenodo DOI has been assigned to ensure formal authorship record.
+## Version and Citation Notice  
 
--Please cite GRUMB using the DOI: https://doi.org/10.5281/zenodo.15505402  
--We kindly request that you do not republish or repackage this methodology before journal publication.
+This repository hosts **GRUMB v2.0**, the **updated and extended version** of the *Genome-Resolved Urban Microbiome Biosurveillance (GRUMB)* framework originally published in **Bioinformatics**:
 
+> **Aminu S., Ascandari A., Benhida R., Daoud R. (2025)**  
+> *GRUMB: A Genome-Resolved Metagenomic Framework for Monitoring Urban Microbiomes and Diagnosing Pathogen Risk.*  
+> *Bioinformatics, Oxford University Press.*  
+> [https://doi.org/10.1093/bioinformatics/btaf548](https://doi.org/10.1093/bioinformatics/btaf548)  
 
 ---
 
-## Citation
+### Framework Update
 
-If you use this Framework, please cite:
-**Aminu S.**, Ascandari A., Benhida R., Daoud R. (2025).  
-*GRUMB: Genome-Resolved Urban Microbiome Biosurveillance*.  
-Zenodo. [https://doi.org/10.5281/zenodo.15505402](https://doi.org/10.5281/zenodo.15505402)
+**GRUMB v2.0** builds upon the original GRUMB architecture with substantial extensions:  
 
+- Integration of **simulation-driven ecological modeling**, including synthetic microbial blending and entropy-based stability analysis.  
+- Expanded **machine learning diagnostics**, featuring nested cross-validation, feature stability analysis, and predictive risk scoring.  
+- Addition of **batch correction and cross-study harmonization** modules (CLR + limma).  
+- Enhanced **computational scalability** and runtime tracking across  metagenomes from multiple projects.  
+ 
+
+These updates were developed as part of the **companion study currently under peer review at *Microbiome***:  
+
+> **Aminu S., Ascandari A., Mokhtar M.M., El Allali A., Benhida R., Daoud R. (2025)**  
+> *Genome-Resolved Species-Level Surveillance and Predictive Risk Modeling of Urban Microbiomes.*  
+> *Microbiome (under review).*  
+
+---
+
+### Citation Guidelines  
+
+If you use this framework, please **cite both works** as follows once the companion paper is published:  
+
+> **Primary Framework (Bioinformatics):**  
+> Aminu S., Ascandari A., Benhida R., Daoud R. (2025).  
+> *GRUMB: A Genome-Resolved Metagenomic Framework for Monitoring Urban Microbiomes and Diagnosing Pathogen Risk.*  
+> *Bioinformatics.* DOI: [10.1093/bioinformatics/btaf548](https://doi.org/10.1093/bioinformatics/btaf548)
+
+> **Companion Study (Microbiome):**  
+> Aminu S., Ascandari A., Mokhtar M.M., El Allali A., Benhida R., Daoud R. (2025).  
+> *Genome-Resolved Species-Level Surveillance and Predictive Risk Modeling of Urban Microbiomes.*  
+> *Microbiome* (forthcoming).  
+
+A **Zenodo DOI** is also available for version tracking and reproducibility:  
+[https://doi.org/10.5281/zenodo.15505402](https://doi.org/10.5281/zenodo.15505402)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15505402.svg)](https://doi.org/10.5281/zenodo.15505402)
 
 
+###  Summary  
 
-## Submitted Articles Related to the Framework
+> GRUMB v2.0 bridges genome-resolved metagenomics with ecological modeling and simulation-based machine learning to advance predictive biosurveillance under the **One Health** framework.  
+> It represents a unified analytical ecosystem, extending from genome recovery to ecological resilience modeling designed for reproducibility, transparency, and cross-environment comparability.
 
-Aminu, S., Ascandari, A., Mokhtar, M.M., El Allali, A., Benhida, R., Daoud, R. (2025).  
-*Genome-Resolved Species-Level Surveillance and Predictive Risk Modeling of Urban Microbiomes*.  
-**Microbiome** (Submitted).
+---
 
-Aminu, S., Ascandari, A., Benhida, R., Daoud, R. (2025).  
-*GRUMB: A Genome-Resolved Metagenomic Framework for Monitoring Urban Microbiome and Diagnosing Pathogen
-Risk*.  
-**Bioinformatics** (Submitted).
-
-## Contact
+### Contact
 For questions, feedback, or collaboration regarding this framework, please reach out:
 
-Suleiman Aminu,
+Suleiman Aminu (Lead Developer),
 PhD Researcher,
 Department of Chemical and Biochemical Sciences,
 University Mohammed VI Polytechnic (UM6P), Morocco,
-suleiman.aminu@um6p.ma
+suleiman.aminu@um6p.ma; saminu83@gmail.com
+
+Abdulaziz Ascandari,
+PhD Researcher,
+Department of Chemical and Biochemical Sciences,
+University Mohammed VI Polytechnic (UM6P), Morocco,
+abdulaziz.ascandari@um6p.ma; ryandari87@gmail.com
 
 Prof. Rachid Daoud,
 Group Leader & Supervisor,
@@ -186,6 +213,6 @@ Department of Chemical and Biochemical Sciences,
 University Mohammed VI Polytechnic (UM6P), Morocco,
 rachid.daoud@um6p.ma
 
-
- 
-
+### Acknowledgements
+This work was supported by internal funding from Mohammed VI Polytechnic University (UM6P) and computational resources from the African Supercomputing Center (https://toubkal.um6p.ma).
+We thank all members of the Chemical and Biochemical Sciences Department for their contributions to the GRUMB project.
