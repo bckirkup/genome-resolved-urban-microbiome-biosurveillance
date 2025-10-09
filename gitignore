@@ -1,57 +1,235 @@
+# ======================================================
+# GRUMB v2 - Genome-Resolved Urban Microbiome Biosurveillance
+# Custom .gitignore for multi-language (Python, R, Shell) metagenomic workflows
+# ======================================================
 
-# Byte-compiled / binary files
-*.pyc
-*.o
-*.so
-
-# Python cache
+# -----------------------------
+# 1️⃣  OS & System Files
+# -----------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
 __pycache__/
-
-# R session files
-.Rhistory
-.RData
-.Rproj.user/
-
-# Jupyter and notebooks
-.ipynb_checkpoints/
-
-# Logs and outputs
+*.swp
+*.bak
+*.tmp
+*.lock
 *.log
 *.out
 *.err
+*.pid
 
-# Temporary or backup files
-*~
-.#*
-*.swp
-*.tmp
-
-# Environment files
-.env/
-.venv/
+# -----------------------------
+# 2️⃣  Python Artifacts
+# -----------------------------
+*.pyc
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+*.manifest
+*.spec
+.pytest_cache/
+.ipynb_checkpoints/
 env/
-*.env
+venv/
+.venv/
+__pycache__/
 
-# Mac system files
-.DS_Store
+# -----------------------------
+# 3️⃣  R & RStudio Artifacts
+# -----------------------------
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+.Rproj
+.Rapp.history
+.Rout
+.Rout.save
+*.RDataTmp
 
-# Linux/Unix trash
-.Trash-*
-
-# HPC SLURM outputs (if not versioned intentionally)
+# -----------------------------
+# 4️⃣  HPC & SLURM Outputs
+# -----------------------------
 slurm-*.out
 slurm-*.err
+*.e*
+*.o*
+nohup.out
+.parallel/
+.tmp/
+.cache/
+logs/
+*.cluster
+*.pbs
+*.qsub
+*.sh~
+*.job
+*.run
+*.log
 
-# Compiled Perl/Python binaries (if ever created)
-*.bs
-*.pm
-*.blib
-
-# Manually generated large data or intermediate outputs
-*_results/
-*_outputs/
-*_checkpoints/
-*.bam
-*.sam
-*.fasta
+# -----------------------------
+# 5️⃣  Metagenomic Intermediate Files
+# -----------------------------
+# Raw data & heavy outputs
 *.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.sra
+*.sam
+*.bam
+*.bai
+*.cram
+*.fna
+*.fasta
+*.fa
+*.faa
+*.ffn
+*.gz
+*.tar
+*.zip
+*.7z
+
+# MAGs & Assembly
+contigs/
+assemblies/
+bins/
+MAGs/
+*.bin
+*.metabat
+*.fa.checkm*
+*.fa.drep*
+*.gtdbtk*
+checkm_output/
+drep_output/
+gtdbtk_output/
+
+# -----------------------------
+# 6️⃣  Annotation & Mapping Outputs
+# -----------------------------
+# CARD, VFDB, RGI, DIAMOND, CoverM, GTDB-Tk
+CARD_output/
+VFDB_output/
+rgi_output/
+diamond_output/
+coverm_output/
+taxonomy/
+*.dmnd
+*.blastx
+*.tsv
+*.rgi
+*.json
+
+# -----------------------------
+# 7️⃣  Figures & Reports
+# -----------------------------
+figures/
+plots/
+results/
+*.pdf
+*.png
+*.tiff
+*.jpg
+*.jpeg
+*.svg
+*.eps
+*.pptx
+*.docx
+*.xlsx
+*.csv
+*.tsv
+*.html
+*.Rout
+*.Rhistory
+report_*.txt
+runtime_analytics/
+Nonpareil_output/
+QUAST_reports/
+
+# -----------------------------
+# 8️⃣  Machine Learning Outputs
+# -----------------------------
+# Intermediate model files, CV outputs, simulation data
+*.pkl
+*.joblib
+*.h5
+*.npy
+*.npz
+*.sav
+Simulations_*.csv
+synthetic_*.csv
+NestedCV_*.csv
+Holdout_*.csv
+RF_importances_*.csv
+DT_importances_*.csv
+Consensus_Feature_Ranking.csv
+environment_risk_scores_all.csv
+
+# -----------------------------
+# 9️⃣  Temporary or Local Files
+# -----------------------------
+tmp/
+temp/
+cache/
+bak/
+old/
+to_delete/
+debug/
+scratch/
+sandbox/
+local/
+test_data/
+*.backup
+*.old
+*.tmp
+*.bak
+*.temp
+
+# -----------------------------
+# 🔟  HPC Job Results and Environment Metadata
+# -----------------------------
+job_logs/
+pipeline_logs/
+runtime_stats/
+profile_output/
+*.runtime.csv
+*.time
+*.mem
+*.cpu
+*.usage
+
+# -----------------------------
+# 🧬  Large Output Directories
+# -----------------------------
+01_Bioinformatics/collect_scripts/output/
+02_quality_assessements_batch_correction/output/
+03_Ecology/output/
+04_Machine_Learning_and_Ecological_Blending_Simulation/output/
+Supplementary_Tables/
+Supplementary_Figures/
+
+# -----------------------------
+# 11️⃣  Compressed & Temporary Archives
+# -----------------------------
+*.tar.gz
+*.zip
+*.gz
+*.bz2
+*.rar
+*.7z
+*.Z
+*.xz
+
+# -----------------------------
+# 12️⃣  Miscellaneous
+# -----------------------------
+notes/
+drafts/
+notebooks/
+dev/
+private/
+local_scripts/
+scratchpads/
+
