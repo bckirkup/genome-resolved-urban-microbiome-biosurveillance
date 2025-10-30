@@ -19,4 +19,4 @@ The analyses integrate genome-resolved metagenomics, ecological diversity metric
 ## Notes
 All genome-resolved metagenomic datasets analyzed are publicly available through the **NCBI Sequence Read Archive (SRA)**, with project identifiers listed in the **GRUMB repository**.  
 This code and processed outputs correspond to **GRUMB v2.0** and are permanently archived on Zenodo:  
-➡️ [10.5281/zenodo.15505402](https://doi.org/10.5281/zenodo.15505402)
+ [10.5281/zenodo.15505402](https://doi.org/10.5281/zenodo.15505402)
