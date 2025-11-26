@@ -178,7 +178,7 @@ If you use this framework, please **cite both works** as follows once the compan
 > **Companion Study (Microbiome):**  
 > Aminu S., Ascandari A., Mokhtar M.M., El Allali A., Benhida R., Daoud R. (2025).  
 > *Genome-Resolved Species-Level Surveillance and Predictive Risk Modeling of Urban Microbiomes.*  
-> *Microbiome* (forthcoming).  
+> *Microbiome* (Accepted).  
 
 A **Zenodo DOI** is also available for version tracking and reproducibility:  
 [https://doi.org/10.5281/zenodo.15505402](https://doi.org/10.5281/zenodo.15505402)
