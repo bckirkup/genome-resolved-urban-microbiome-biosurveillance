@@ -157,18 +157,14 @@ This repository hosts **GRUMB v2.0**, the **updated and extended version** of th
 - Addition of **batch correction and cross-study harmonization** modules (CLR + limma).  
 - Enhanced **computational scalability** and runtime tracking across  metagenomes from multiple projects.  
  
+These updates were published at *Microbiome***:  
 
-These updates were developed as part of the **companion study currently under peer review at *Microbiome***:  
-
-> **Aminu S., Ascandari A., Mokhtar M.M., El Allali A., Benhida R., Daoud R. (2025)**  
-> *Genome-Resolved Species-Level Surveillance and Predictive Risk Modeling of Urban Microbiomes.*  
-> *Microbiome (under review).*  
 
 ---
 
 ### Citation Guidelines  
 
-If you use this framework, please **cite both works** as follows once the companion paper is published:  
+If you use this framework, please **cite both works** as follows:  
 
 > **Primary Framework (Bioinformatics):**  
 > Aminu S., Ascandari A., Benhida R., Daoud R. (2025).  
@@ -177,8 +173,9 @@ If you use this framework, please **cite both works** as follows once the compan
 
 > **Companion Study (Microbiome):**  
 > Aminu S., Ascandari A., Mokhtar M.M., El Allali A., Benhida R., Daoud R. (2025).  
-> *Genome-Resolved Species-Level Surveillance and Predictive Risk Modeling of Urban Microbiomes.*  
-> *Microbiome* (Accepted).  
+> *Genome-resolved surveillance and predictive ecological risk modeling of urban microbiomes.*  
+> *Microbiome*.https://doi.org/10.1186/s40168-025-02315-3
+
 
 A **Zenodo DOI** is also available for version tracking and reproducibility:  
 [https://doi.org/10.5281/zenodo.15505402](https://doi.org/10.5281/zenodo.15505402)
