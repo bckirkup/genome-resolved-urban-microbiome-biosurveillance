@@ -157,7 +157,7 @@ This repository hosts **GRUMB v2.0**, the **updated and extended version** of th
 - Addition of **batch correction and cross-study harmonization** modules (CLR + limma).  
 - Enhanced **computational scalability** and runtime tracking across  metagenomes from multiple projects.  
  
-These updates were published at *Microbiome***:  
+These updates were published at **Microbiome**:  
 
 
 ---
