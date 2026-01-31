@@ -172,9 +172,10 @@ If you use this framework, please **cite both works** as follows:
 > *Bioinformatics.* DOI: [10.1093/bioinformatics/btaf548](https://doi.org/10.1093/bioinformatics/btaf548)
 
 > **Companion Study (Microbiome):**  
-> Aminu S., Ascandari A., Mokhtar M.M., El Allali A., Benhida R., Daoud R. (2025).  
+> Aminu, S., Ascandari, A., Mokhtar, M.M. et al.  
 > *Genome-resolved surveillance and predictive ecological risk modeling of urban microbiomes.*  
-> *Microbiome*.https://doi.org/10.1186/s40168-025-02315-3
+> *Microbiome* 14, 45 (2026). https://doi.org/10.1186/s40168-025-02315-3
+>  
 
 
 A **Zenodo DOI** is also available for version tracking and reproducibility:  
